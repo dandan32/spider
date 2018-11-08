@@ -9,14 +9,27 @@
 
 import imp
 import sys
+import types
 
 """动态加载爬虫脚本"""
 
 source = """
+import os
+import sys
+import math
+
+
 class A:
     url = ''
     header = []
     cookies = []
+    
+    def hellp(self):
+        print("hello")
+
+
+B = 1
+    
 """
 print('creating a new module object for {!r}'.format("test"))
 mod = sys.modules.setdefault("test",imp.new_module("test"))
@@ -41,10 +54,14 @@ print('done')
 import test
 
 a =  test.A
-print(dir(test))
 
-print(sys.modules)
+for each in dir(test):
+    if isinstance(getattr(test, each), type):
+        # TODO 判断是否为Handler的子类
+        print(each, type(getattr(test, each)))
+
 
 
 def LoadScript(name, content):
     """load spider script."""
+    pass
